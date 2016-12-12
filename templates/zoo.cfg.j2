@@ -29,8 +29,8 @@ clientPort=2181
 # the directory where the transaction logs are stored.
 dataLogDir={{zk_data_logDir}}
 
-# server.{{hostvars[host]['zk_myid']}}={{hostvars[host]['ansible_' + hostvars[host]['zk_iface']]['ipv4']['address']}}:{{zk_leaderPort}}:{{zk_electionPort}}
 
 {% for host in groups['zookeeper'] %}
-server.{{hostvars[host]['zk_myid']}}={{ hostvars[host][ansible_default_ipv4][address] }}:{{zk_leaderPort}}:{{zk_electionPort}}
+server.{{hostvars[host]['zk_myid']}}={% if hostvars[host]['zk_ip'] is defined %}{{ hostvars[host]['zk_ip'] }}{% else %}{{ hostvars[host].ansible_default_ipv4.address }}{% endif %}:{{zk_leaderPort}}:{{zk_electionPort}}
 {% endfor %}
+

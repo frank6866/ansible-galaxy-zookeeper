@@ -1,40 +1,49 @@
-tensorflow
-==========
+zookeeper
+=========
 
-This role install tensorflow on Linux(CentOS and Ubuntu are supported).
-
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role install zookeeper on Linux(CentOS and Ubuntu are supported).
 
 Role Variables
 --------------
 
-There are only two variables for repository mirror, as the default values listed below:
+The variables for repository mirror, as the default values listed below:
 
-    # The venv path to install tensorflow
-    tensorflow_venv_path: ~/venvs/tensorflow
-    
-    # The binary url of tensorflow
-    TF_BINARY_URL_Linux_CPU_2: https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.0rc0-cp27-none-linux_x86_64.whl
+        zk_maxClientCnxns : 50
+        zk_tickTime : 2000
+        zk_initLimit : 10
+        zk_syncLimit : 5
+        zk_dataDir : /var/lib/zookeeper
+        zk_data_logDir : /var/lib/zookeeper
+        zk_clientPort : 2181
+        zk_leaderPort : 2888
+        zk_electionPort : 3888
 
-Usually you don't need to change them.
-
-Dependencies
-------------
-
-This role depend on [frank6866.pip](https://galaxy.ansible.com/frank6866/pip/)
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+If you have only one ip in the host, you can ignore the variable "zk_ip". If you have multiple ip in some host, you should specify the ip used by zookeeper through variable "zk_ip".
 
-    - hosts: servers
-      roles:
-         - { role: frank6866.pip }
-         - { role: frank6866.tensorflow }
+Inventory file:
+
+```
+
+[zookeeper]
+vagrant1 zk_myid=1
+vagrant2 zk_myid=2 zk_ip=192.168.168.202
+vagrant3 zk_myid=3 zk_ip=192.168.168.203
+
+```
+
+Playbook:
+
+```
+
+- hosts: servers
+   roles:
+      - { role: frank6866.zookeeper }
+
+```
 
 License
 -------

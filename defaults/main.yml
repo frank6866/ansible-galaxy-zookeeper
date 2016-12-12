@@ -1,0 +1,11 @@
+---
+zk_maxClientCnxns : 50
+zk_tickTime : 2000
+zk_initLimit : 10
+zk_syncLimit : 5
+zk_dataDir : /var/lib/zookeeper
+zk_data_logDir : /var/lib/zookeeper
+zk_clientPort : 2181
+zk_leaderPort : 2888
+zk_electionPort : 3888
+zk_iface : eth0

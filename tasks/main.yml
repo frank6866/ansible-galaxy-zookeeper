@@ -1,0 +1,11 @@
+---
+
+
+- name: install zookeeper on CentOS
+  include: centos.yml
+  when: ansible_os_family == "RedHat" or ansible_os_family == "CentOS"
+
+#- name: install zookeeper on Ubuntu
+#  include: ubuntu.yml
+#  when: ansible_os_family == "Debian"
+#

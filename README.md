@@ -1,12 +1,12 @@
 zookeeper
 =========
 
-This role install zookeeper on Linux(CentOS and Ubuntu are supported).
+This role install zookeeper cluster on CentOS/RHEL.
 
 Role Variables
 --------------
 
-The variables for repository mirror, as the default values listed below:
+The variables for zookeeper, as the default values listed below:
 
         zk_maxClientCnxns : 50
         zk_tickTime : 2000
@@ -22,7 +22,9 @@ The variables for repository mirror, as the default values listed below:
 Example Playbook
 ----------------
 
-If you have only one ip in the host, you can ignore the variable "zk_ip". If you have multiple ip in some host, you should specify the ip used by zookeeper through variable "zk_ip".
+If you have only one ip in the host, you can ignore the variable "zk_ip". If you have multiple ip in a host, you should specify the ip used by zookeeper through variable "zk_ip".  
+
+> Notice: hosts should be in the group "zookeeper".
 
 Inventory file:
 
@@ -46,8 +48,8 @@ Playbook:
 ```
 
 
-Zookeeper
----------
+Zookeeper Usage
+---------------
 
 ```
 # cli
@@ -57,6 +59,18 @@ zookeeper-client
 zookeeper-server status
 
 ```
+
+
+Testing
+-------
+There are 3 hosts in "Vagrantfile" in the root directory, run the "vagrant.sh" script to test.
+
+```
+
+./vagrant.sh
+
+```
+
 
 
 License

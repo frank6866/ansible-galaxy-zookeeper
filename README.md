@@ -45,6 +45,20 @@ Playbook:
 
 ```
 
+
+Zookeeper
+---------
+
+```
+# cli
+zookeeper-client
+
+# check status
+zookeeper-server status
+
+```
+
+
 License
 -------
 

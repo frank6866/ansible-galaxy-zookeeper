@@ -1,11 +1,39 @@
 ---
 
+# tasks file for install zookeeper on centos
 
-- name: install zookeeper on CentOS
-  include: centos.yml
-  when: ansible_os_family == "RedHat" or ansible_os_family == "CentOS"
 
-#- name: install zookeeper on Ubuntu
-#  include: ubuntu.yml
-#  when: ansible_os_family == "Debian"
-#
+- name: check if jdk is installed
+  shell: java -version 2>&1
+  register: jdk_installed
+  ignore_errors: true
+
+- name: install openjdk if jdk is not installed
+  yum: name=java-1.8.0-openjdk state=present
+  when: jdk_installed | failed
+  become: true
+
+- name: create cdh5 yum repo
+  copy: src=cloudera-cdh5.repo dest=/etc/yum.repos.d/cloudera-cdh5.repo
+  become: true
+
+- name: install zookeeper
+  yum: name={{ item }} state=present enablerepo=cloudera-cdh5
+  with_items:
+    - zookeeper
+    - zookeeper-server
+  become: true
+
+- name: config zookeeper
+  template: src=zoo.cfg.j2 dest=/etc/zookeeper/conf/zoo.cfg
+  notify: restart zookeeper
+  become: true
+
+- name: set myid
+  shell: zookeeper-server-initialize  --force --myid={{ zk_myid }}
+  become: zookeeper
+
+- name: launch zookeeper
+  service: name=zookeeper-server enabled=yes state=started
+  become: true
+

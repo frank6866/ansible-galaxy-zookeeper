@@ -48,8 +48,9 @@ Playbook:
 
 ```
 - hosts: zookeeper
-   roles:
-      - { role: /path/to/zookeeper-role }
+  become: true
+  roles:
+    - { role: /path/to/zookeeper-role }
 
 ```
 

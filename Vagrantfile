@@ -46,10 +46,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                 "vagrant3" => {"zk_myid" => 3, "zk_ip" => "192.168.168.203"}
             }
         end
-
-
-
     end
-
-
 end

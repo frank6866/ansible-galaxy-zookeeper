@@ -1,10 +1,9 @@
-zookeeper
-=========
+# zookeeper
 
-This role install zookeeper cluster on CentOS/RHEL.
+This role is used to deploy zookeeper cluster on CentOS/RHEL.
 
-Role Variables
---------------
+## Role Variables
+
 
 The variables for zookeeper, as the default values listed below:
 
@@ -19,12 +18,12 @@ zk_clientPort : 2181
 zk_leaderPort : 2888zk_electionPort : 3888
 ```
 
-Example Inventory file
-----------------------
+## Example Inventory file
+
 ```
-zk-1 ansible_ssh_host=10.12.10.209 ansible_ssh_port=22 ansible_ssh_user=centos
-zk-2 ansible_ssh_host=10.12.10.200 ansible_ssh_port=22 ansible_ssh_user=centos
-zk-3 ansible_ssh_host=10.12.10.210 ansible_ssh_port=22 ansible_ssh_user=centos
+zk-1 ansible_ssh_host=192.168.168.201 ansible_ssh_port=22 ansible_ssh_user=centos
+zk-2 ansible_ssh_host=192.168.168.202 ansible_ssh_port=22 ansible_ssh_user=centos
+zk-3 ansible_ssh_host=192.168.168.203 ansible_ssh_port=22 ansible_ssh_user=centos
 
 
 [cluster1]
@@ -41,8 +40,7 @@ cluster1
 If you have only one ip in the host, you can ignore the variable "zk_ip". If you have multiple ip in a host, you should specify the ip used by zookeeper through variable "zk_ip".
 
 
-Example Playbook
-----------------
+## Example Playbook
 
 Playbook:
 
@@ -55,8 +53,8 @@ Playbook:
 ```
 
 
-Zookeeper Usage
----------------
+## Zookeeper Usage
+
 
 ```
 # cli
@@ -68,17 +66,13 @@ zookeeper-server status
 ```
 
 
-Testing
--------
+## Testing
+
 There are 3 hosts in "Vagrantfile" in the root directory, run the "vagrant.sh" script to test.
 
 ```
-
-./vagrant.sh
-
+# ./vagrant.sh
 ```
-
-
 
 License
 -------

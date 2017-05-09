@@ -3,7 +3,7 @@
 # destroy vms without prompt
 destroy_vms() {
     echo "--------------------------destroy vagrant vms"
-    vagrant destroy -f
+    vagrant destroy -f;  rm -rf .vagrant
 
     echo "--------------------------make sure vms destroyed"
     vagrant status
